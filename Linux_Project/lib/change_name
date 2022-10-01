@@ -1,0 +1,25 @@
+#! /bin/bash
+
+change_name ()
+{
+  echo "======== Change name ============"
+  loop=1
+  while [ $loop -eq 1 ]
+  do
+    read -p "please enter the name of the record you would like to change: " old_name
+    search_name "$old_name" || retv=$?
+
+    if [ $retv -eq 1 ]
+    then
+      let loop=0
+      #return XXX
+    elif [ $retv -eq 10 ]
+    then
+      echo Try Again
+    else
+      read -p "enter new name: " new_name
+      sed -i "s/$user_choice_search/$new_name/" "$file"
+      let loop=0
+    fi
+  done
+}

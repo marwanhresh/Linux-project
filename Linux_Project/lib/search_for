@@ -1,0 +1,47 @@
+#! /bin/bash
+
+search_name ()
+{
+  local allnames PS3 IFS
+  allnames=$(cut "$file" -d, -f1 | grep -i "$1" | tr $'\n' , )
+  IFS=","
+
+  if [[ -z $allnames ]]; then
+    echo "the record does not exist"
+    return 1
+  fi
+
+  PS3="please choose record: "
+  select records in $allnames "none of them" exit; do
+    case $records in
+      "none of them") return 10 ;;
+      exit) return 254 ;;
+      *) break ;;
+    esac
+  done
+
+  user_choice_search=$records
+  return  4
+}
+
+
+function uiSearchFor
+{
+  local -i ret
+  local    search
+
+  echo "========== search for record ==========="
+  read -rp "Search for: " search || return
+
+  if
+    search_name "$search" || ret=$?
+    (( ret == 10 || ret == 1 ))
+
+  then
+    echo "Record doesn't exist"
+    return
+
+  fi
+
+  awk -F, -v query=$user_choice_search '$1 ~ query { print $1, $2 } ' "$file"
+}

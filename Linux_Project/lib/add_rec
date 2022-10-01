@@ -1,0 +1,40 @@
+#! /bin/bash
+
+add_rec()
+{
+  read -p "Please Enter Record Name to Add: "  add_record
+  search_name $add_record || hadas=$?
+  echo "======= adding record ======="
+
+  line_num=$(cat -n  "$file" | grep  "$user_choice_search" | cut -f1)
+  #############  find the line number to work with
+  #echo $line_num "--> this is what line "
+  #grep "$user_choice_search" "$file" 
+  #echo " ret value is - $ret "
+  case $hadas in
+    10|1)
+      echo " record dosent exist --- Adding new record "
+      read -p 'please select amount of new record : '  new_amount
+      echo $add_record,$new_amount >> "$file" 
+      ;;
+
+    4)
+      n=55
+      #echo -n "the amount we have from \"$user_choice_search\" is :"  
+      exi_amount=$(cat  "$file" | grep "$user_choice_search" | cut -f2 -d ",") 	
+      echo -n "the amount we have from \"$user_choice_search\" is : " $exi_amount 
+      echo " you chose an existing record "
+      read -p 'enter the amount to add :' n
+      if [ $n -gt 0 ]
+      then
+        let  n=$n+$exi_amount
+      else
+        echo the amount you entered is invalid
+        let n=$exi_amount
+      fi
+      #sed  's/$exi_amount/$n/' "$file"
+      #sed -i '/"$user_choice_search"/cyour text' "$file"
+      sed -i ''$line_num's/.*/'$user_choice_search,$n'/' "$file"
+      ;;
+  esac
+}

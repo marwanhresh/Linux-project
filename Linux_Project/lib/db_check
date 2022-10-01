@@ -1,0 +1,20 @@
+#! /bin/bash
+
+checkfile ()
+{
+  local default
+  default="${script_dir}/RecordsFileName.txt"
+  declare -g file=${1:-$default}
+
+  # if [[ $file == $default ]]; then
+  #   echo "Using default $file" >&2
+  # fi
+
+  if ! [[ -f $file ]]; then
+    echo "Creating new file $file" >&2
+    touch "$file"
+  fi
+
+  # return exit code checking if the file is accessible
+  [[ -w $file && -r $file ]]
+}

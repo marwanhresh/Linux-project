@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+main_loop()
+{
+  checkfile || log "No access to DB file"
+
+  local -a choices
+  local -i choice_nr
+  local choice PS3 OFS IFS; OFS=$IFS IFS=$'\n'
+
+  choices=(
+    "Add a record"
+    "Delete a record"
+    "Search by name"
+    "Update name"
+    "Update amount"
+    "List records (summery)"
+    "List records (sorted)"
+    "exit"
+  )
+
+  printf -v PS3 "\x1b[32;1m%s\x1b[m: " "Select an action"
+  select choice in "${choices[@]}"; do
+    if
+      (( choice_nr=10#0${REPLY//[^[:digit:]]/}, choice_nr == 0 || choice_nr > ${#choices[@]} ))
+    then
+      echo "Invalid choice" >&2
+      continue
+
+    else
+      case "$choice" in
+        "Add a record") add_rec ;;
+        "Delete a record") uiRecordDelete ;;
+        "Search by name") uiSearchFor ;;
+        "Update name") change_name ;;
+        "Update amount") update_amount ;;
+        "List records (summery)") ;;
+        "List records (sorted)") ;;
+        "exit") exit ;;
+        *) log "invalid choice allowed"; exit 1 ;;
+      esac
+    fi
+  done
+}
+
+script_dir=$(dirname "$(realpath "${BASH_SOURCE[0]}") ")
+
+for file in "$script_dir"/lib/*; do
+  source "$file"
+done
+
+main_loop "$@"

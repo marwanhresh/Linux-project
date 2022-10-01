@@ -1,0 +1,36 @@
+#! /bin/bash
+
+update_amount ()
+{
+  sum=0
+  loop_amount=0
+  echo "============ update amt =============="
+
+  while [ $loop_amount -eq 0 ]
+  do
+    read -p "please enter the name of the record you would like to update amount for: " update_record
+    search_name "$update_record" || retu=$?
+    old_num=$(grep -w "$user_choice_search" "$file" | cut -f2 -d ",")
+
+    if [ $retu -eq 1 ]
+    then
+      let loop_amount=1
+    elif [ $retu -eq 10 ]
+    then
+      echo try again
+    else
+      if [ $old_num -lt 1 ]
+      then
+        echo "##low amount of records##"
+      fi
+      echo "the record $user_choice_search have $old_num copies"
+      read -p "please enter amount to add: " new_num
+      let sum=$old_num+$new_num
+      let l_num=$(cat -n RecordsFileName.txt | grep "$user_choice_search" | cut -f1)
+
+      sed -i $l_num"s/.*/$user_choice_search,$sum/" "$file"
+      let loop_amount=1
+    fi
+
+  done
+}

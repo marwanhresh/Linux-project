@@ -1,0 +1,33 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/home/leon/Documents/vimwiki/aws/Linux_Project/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	/p5.9.20210905.0/
+IFS	lib/search_for	/^  IFS=","$/;"	v
+PS3	lib/search_for	/^  PS3="please choose record: "$/;"	v
+add_rec	lib/add_rec	/^add_rec()$/;"	f
+allnames	lib/search_for	/^  allnames=$(cut "$file" -d, -f1 | grep -i "$1" | tr $'\\n' , )$/;"	v
+change_name	lib/change_name	/^change_name ()$/;"	f
+checkfile	lib/db_check	/^checkfile ()$/;"	f
+choices	project	/^  choices=($/;"	v
+default	lib/db_check	/^  default="${script_dir}\/RecordsFileName.txt"$/;"	v
+exi_amount	lib/add_rec	/^      exi_amount=$(cat  "$file" | grep "$user_choice_search" | cut -f2 -d ",") 	$/;"	v
+line_num	lib/add_rec	/^  line_num=$(cat -n  "$file" | grep  "$user_choice_search" | cut -f1)$/;"	v
+loop	lib/change_name	/^  loop=1$/;"	v
+loop_amount	lib/update_amt	/^  loop_amount=0$/;"	v
+main_loop	project	/^main_loop()$/;"	f
+n	lib/add_rec	/^      n=55$/;"	v
+old_num	lib/update_amt	/^    old_num=$(grep -w "$user_choice_search" "$file" | cut -f2 -d ",")$/;"	v
+script_dir	project	/^script_dir=$(dirname "$(realpath "${BASH_SOURCE[0]}") ")$/;"	v
+search_name	lib/search_for	/^search_name ()$/;"	f
+sum	lib/update_amt	/^  sum=0$/;"	v
+uiRecordDelete	lib/del_rec	/^function uiRecordDelete$/;"	f
+uiSearchFor	lib/search_for	/^function uiSearchFor$/;"	f
+update_amount	lib/update_amt	/^update_amount ()$/;"	f
+user_choice_search	lib/search_for	/^  user_choice_search=$records$/;"	v
