@@ -1,14 +1,20 @@
-Summary exercise in Linux
+# Summary exercise in Linux
+
 Purpose:
+
 ●Operating system commands
+
 Flow control
 ●Operators
 ●Functions
 ●Input/output to files
 ●Algorithmic thinking
 Automation (task 2)
-Task 1
+
+# Task 1
+
 General description:
+
 In this exercise you will manage a record collection.
 Each record has a unique name, and there may be more than one copy.
 To manage the collection the following actions must be performed
